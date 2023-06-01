@@ -1,0 +1,35 @@
+name = input("Enter your Name: ")
+
+weight = int(input("Enter your weight in pounds: "))
+
+height = int(input("Enter your height in inches: "))
+
+BMI = (weight * 703) / (height * height)
+
+print(BMI)
+
+
+if BMI>0:
+    if(BMI<18.5):
+        print(name + ", you are underweight. You may need to eat more.")
+    elif(BMI<=24.9):
+        print(name + ", you are normal weight. You are doing great!")
+    elif(BMI<29.9):
+        print(name + ", you are overweight. You may need to excersise more.")
+    elif(BMI<34.9):
+        print(name + ", you are obese. You may need to exercise more, and eat healthier. ")
+    elif(BMI<39.9):
+        print(name + ", you are severely obese. You need to exercise and eat less.")
+    else:
+        Print(name + ", you are morbidly obese. You HAVE to exercise and eat far less.")
+else:
+    print("Enter Valid Inputs")
+    
+    # Calculator Factors
+    #BMI = (weight in pounds x 703) / (height in inches x height in inches)
+    Under 18.5	Underweight	Minimal
+18.5 - 24.9	Normal Weight	Minimal
+25 - 29.9	Overweight	Increased
+30 - 34.9	Obese	High
+35 - 39.9	Severely Obese	Very High
+40 and over	Morbidly Obese	Extremely High
