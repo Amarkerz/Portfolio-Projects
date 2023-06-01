@@ -1,0 +1,115 @@
+# Define Import Libraries
+
+
+from bs4 import BeautifulSoup
+import requests
+import time
+import datetime
+import smtplib
+
+
+# connect to website
+
+URL = 'https://www.amazon.com/Naturiway-Commemorative-Cryptocurrency-Collectible-Protective/dp/B09J8J55RG/ref=sr_1_4_sspa?crid=1N0DUTVWKSX5G&keywords=Bitcoin&qid=1684809760&sprefix=bitcoin+%2Caps%2C140&sr=8-4-spons&psc=1&spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUExTlRQWDVETUNXUFlCJmVuY3J5cHRlZElkPUEwMDYzMDAyMThBTEM5U0RaTEkxUCZlbmNyeXB0ZWRBZElkPUEwODk5NTg4MURWTkZDQ0g2TVJWUiZ3aWRnZXROYW1lPXNwX2F0ZiZhY3Rpb249Y2xpY2tSZWRpcmVjdCZkb05vdExvZ0NsaWNrPXRydWU='
+
+headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36 Edg/113.0.1774.50"}
+
+page = requests.get(URL, headers=headers)
+
+soup1 = BeautifulSoup(page.content, "html.parser")
+
+soup2 = BeautifulSoup(soup1.prettify(), "html.parser")
+
+title_element = soup2.find(id="productTitle")
+title = title_element.get_text(strip=True) if title_element else "Title not found or URL/elements updated through Amazon"
+
+price_element = soup2.find(id="a-price-whole")
+price = price_element.get_text(strip=True) if price_element else "Price not found or URL/elements updated through Amazon"
+
+print(title)
+print(price)
+
+
+import datetime
+today = datetime.date.today()
+
+print(today)
+
+
+import csv
+header = ['Title', 'Price', 'Date']
+data = [title,price,today]
+
+with open('AmazonWebScraperBTC.cvs', 'w', newline='', encoding='UTF8') as f:
+    writer = csv.writer(f)
+    writer.writerow(header)
+    writer.writerow(data)
+    
+    
+    import pandas as pd
+df = pd.red_csv('C:\Users\austi\OneDrive\Desktop\Data Analytics Study\Excel\AmazonWebScraperBTC.cvs')
+
+
+# Appending data to Excel csv
+
+with open('AmazonWebScraperBTC.cvs', 'a+', newline='', encoding='UTF8') as f:
+    writer = csv.writer(f)
+    writer.writerow(data)
+    
+    
+   def check_price():
+    URL = 'https://www.amazon.com/Naturiway-Commemorative-Cryptocurrency-Collectible-Protective/dp/B09J8J55RG/ref=sr_1_4_sspa?crid=1N0DUTVWKSX5G&keywords=Bitcoin&qid=1684809760&sprefix=bitcoin+%2Caps%2C140&sr=8-4-spons&psc=1&spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUExTlRQWDVETUNXUFlCJmVuY3J5cHRlZElkPUEwMDYzMDAyMThBTEM5U0RaTEkxUCZlbmNyeXB0ZWRBZElkPUEwODk5NTg4MURWTkZDQ0g2TVJWUiZ3aWRnZXROYW1lPXNwX2F0ZiZhY3Rpb249Y2xpY2tSZWRpcmVjdCZkb05vdExvZ0NsaWNrPXRydWU='
+
+    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36 Edg/113.0.1774.50"}
+
+    page = requests.get(URL, headers=headers)
+
+    soup1 = BeautifulSoup(page.content, "html.parser")
+
+    soup2 = BeautifulSoup(soup1.prettify(), "html.parser")
+
+    title_element = soup2.find(id="productTitle")
+    title = title_element.get_text(strip=True) if title_element else "Title not found or URL/elements updated through Amazon"
+
+    price_element = soup2.find(id="a-price-whole")
+    price = price_element.get_text(strip=True) if price_element else "Price not found or URL/elements updated through Amazon"
+    
+    import datetime
+        today = datetime.date.today()
+    
+    import csv
+    header = ['Title', 'Price', 'Date']
+    data = [title,price,today]
+    
+    with open('AmazonWebScraperBTC.cvs', 'a+', newline='', encoding='UTF8') as f:
+        writer = csv.writer(f)
+        writer.writerow(data)
+        
+        
+        while(True):
+    check_price()
+    time.sleep(3600)
+    
+    
+    import pandas as pd
+
+df = pd.red_csv('C:\Users\austi\OneDrive\Desktop\Data Analytics Study\Excel\AmazonWebScraperBTC.cvs')
+
+print(df)
+
+
+# Email Alert
+
+def send_mail():
+    server = smtplib.SMTP_SSL('smtp.gmail.com',465)
+    server.ehlo()
+    #server.starttls()
+    server.ehlo()
+    server.login('Email', 'Password')
+    
+    subject = 'The Bitcoin is now below $10! Now is the chance to buy!'
+    body = "Austin, your bitcoin is now ready to purchase. It's dropped below $10 and is a great deal!"
+    
+    msg = f"Subject: {subject}\n\n{body}"
+    
+    server.sendmail('email', msg)
